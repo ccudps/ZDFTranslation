@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ZDF Lingua Settings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="popup-body">
+  <div class="header">
+    <div class="logo">ZDF Lingua</div>
+    <label class="switch">
+      <input type="checkbox" id="toggle-extension">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="control-group">
+    <label for="provider-select">Translation Provider</label>
+    <select id="provider-select">
+      <option value="openai">OpenAI (GPT-4o-mini)</option>
+      <option value="gemini">Google Gemini (Flash)</option>
+    </select>
+  </div>
+
+  <div class="control-group" id="group-openai">
+    <label for="api-key-openai">OpenAI API Key</label>
+    <input type="password" id="api-key-openai" placeholder="sk-...">
+  </div>
+
+  <div class="control-group" id="group-gemini" style="display:none;">
+    <label for="api-key-gemini">Gemini API Key</label>
+    <input type="password" id="api-key-gemini" placeholder="AIza...">
+  </div>
+
+  <button class="save-btn" id="save-btn">Save Settings</button>
+
+  <div id="status" class="status-msg"></div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

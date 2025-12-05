@@ -1,0 +1,244 @@
+/* 
+  ZDF Lingua - Main Stylesheet
+  Used by both:
+  1. Extension Popup (popup.html)
+  2. Content Script (injected into zdf.de)
+*/
+
+:root {
+  /* Namespaced Variables to prevent collisions */
+  --zl-color-primary: #fa7d19;
+  /* ZDF Orange */
+  --zl-color-primary-hover: #d16512;
+  --zl-color-bg: #ffffff;
+  --zl-color-text: #333333;
+  --zl-color-border: #eeeeee;
+  --zl-color-input-border: #cccccc;
+
+  /* Overlay specific colors */
+  --zl-color-overlay-bg: #333333;
+  --zl-color-text-german: #D9D0BB;
+  --zl-color-text-english: #F5F5F5;
+
+  /* Spacing & Layout */
+  --zl-spacing-xs: 5px;
+  --zl-spacing-sm: 8px;
+  --zl-spacing-md: 10px;
+  --zl-spacing-lg: 15px;
+  --zl-spacing-xl: 20px;
+  --zl-border-radius: 4px;
+  --zl-overlay-border-radius: 10px;
+
+  /* Typography */
+  --zl-font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --zl-font-size-base: 16px;
+  --zl-font-size-lg: 32px;
+  --zl-font-weight-bold: 600;
+
+  /* Transitions */
+  --zl-transition-fast: 0.1s;
+  --zl-transition-medium: 0.2s;
+
+  /* Utils */
+  --zl-z-max: 2147483647;
+  --zl-color-warning: #ff4444;
+}
+
+/* =========================================
+   RESET & SHARED
+   ========================================= */
+.popup-body,
+.zl-scope {
+  box-sizing: border-box;
+}
+
+.popup-body *,
+.popup-body *:before,
+.popup-body *:after,
+.zl-scope *,
+.zl-scope *:before,
+.zl-scope *:after {
+  box-sizing: inherit;
+}
+
+/* =========================================
+   POPUP STYLES
+   ========================================= */
+body.popup-body {
+  width: 300px;
+  padding: var(--zl-spacing-lg);
+  font-family: var(--zl-font-stack);
+  margin: 0;
+  background-color: var(--zl-color-bg);
+  color: var(--zl-color-text);
+  font-size: var(--zl-font-size-base);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--zl-spacing-xl);
+  border-bottom: 2px solid var(--zl-color-border);
+  padding-bottom: var(--zl-spacing-md);
+}
+
+.logo {
+  font-size: var(--zl-font-size-lg);
+  font-weight: var(--zl-font-weight-bold);
+  color: var(--zl-color-primary);
+}
+
+.control-group {
+  margin-bottom: var(--zl-spacing-lg);
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: var(--zl-spacing-xs);
+  font-weight: var(--zl-font-weight-bold);
+}
+
+.control-group input[type="text"],
+.control-group input[type="password"],
+.control-group select {
+  width: 100%;
+  padding: var(--zl-spacing-sm);
+  border: 1px solid var(--zl-color-input-border);
+  border-radius: var(--zl-border-radius);
+  font-family: inherit;
+}
+
+.control-group input:focus-visible,
+.control-group select:focus-visible {
+  outline: 2px solid var(--zl-color-primary);
+  border-color: transparent;
+}
+
+/* Primary Button */
+.save-btn {
+  width: 100%;
+  padding: var(--zl-spacing-md);
+  background-color: var(--zl-color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--zl-border-radius);
+  cursor: pointer;
+  font-weight: var(--zl-font-weight-bold);
+  transition: background-color var(--zl-transition-fast);
+}
+
+.save-btn:hover {
+  background-color: var(--zl-color-primary-hover);
+}
+
+.save-btn:focus-visible {
+  outline: 2px solid var(--zl-color-primary-hover);
+  outline-offset: 2px;
+}
+
+/* Status Messages */
+.status-msg {
+  margin-top: var(--zl-spacing-md);
+  font-size: 12px;
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.status-msg.success {
+  color: #D9D0BB;
+}
+
+.status-msg.error {
+  color: var(--zl-color-warning);
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--zl-color-input-border);
+  transition: var(--zl-transition-medium);
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: var(--zl-transition-medium);
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: var(--zl-color-primary);
+}
+
+input:checked+.slider:before {
+  transform: translateX(18px);
+}
+
+input:focus-visible+.slider {
+  box-shadow: 0 0 1px var(--zl-color-primary);
+}
+
+/* =========================================
+   OVERLAY STYLES (Content Script)
+   ========================================= */
+#zdf-lingua-overlay {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 800px;
+  padding: var(--zl-spacing-lg);
+  background-color: var(--zl-color-overlay-bg);
+  border-radius: var(--zl-overlay-border-radius);
+  z-index: var(--zl-z-max);
+  text-align: center;
+  pointer-events: none;
+  /* Pass clicks to video */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  font-family: var(--zl-font-stack);
+  transition: opacity 0.3s ease;
+  will-change: opacity;
+}
+
+.zdf-lingua-german {
+  color: var(--zl-color-text-german);
+  font-size: var(--zl-font-size-lg);
+  margin-bottom: var(--zl-spacing-xs);
+}
+
+.zdf-lingua-english {
+  color: var(--zl-color-text-english);
+  font-size: var(--zl-font-size-lg);
+}
+
+.zdf-lingua-warning {
+  color: var(--zl-color-warning);
+  font-size: var(--zl-font-size-base);
+  font-weight: var(--zl-font-weight-bold);
+}
