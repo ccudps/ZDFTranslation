@@ -1,58 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const providerSelect = document.getElementById('provider-select');
-    const groupOpenAI = document.getElementById('group-openai');
-    const groupGemini = document.getElementById('group-gemini');
-
-    const apiKeyOpenAI = document.getElementById('api-key-openai');
-    const apiKeyGemini = document.getElementById('api-key-gemini');
-
-    const toggleSwitch = document.getElementById('toggle-extension');
+item('DOMContentLoaded', () => {
+    const textSizeSelect = document.getElementById('text-size');
+    const showGermanCheckbox = document.getElementById('show-german');
     const saveBtn = document.getElementById('save-btn');
     const statusDiv = document.getElementById('status');
 
     // Load saved settings
-    chrome.storage.local.get(['openaiApiKey', 'geminiApiKey', 'provider', 'extensionEnabled'], (result) => {
-        if (result.openaiApiKey) apiKeyOpenAI.value = result.openaiApiKey;
-        if (result.geminiApiKey) apiKeyGemini.value = result.geminiApiKey;
-
-        if (result.provider) {
-            providerSelect.value = result.provider;
+    chrome.storage.local.get(['textSize', 'showGerman'], (result) => {
+        if (result.textSize) {
+            textSizeSelect.value = result.textSize;
         }
 
-        updateVisibility();
-
-        toggleSwitch.checked = result.extensionEnabled !== false;
+        // Default to true if undefined
+        showGermanCheckbox.checked = result.showGerman !== false;
     });
-
-    // Provider change handler
-    providerSelect.addEventListener('change', updateVisibility);
-
-    function updateVisibility() {
-        const provider = providerSelect.value;
-        if (provider === 'openai') {
-            groupOpenAI.style.display = 'block';
-            groupGemini.style.display = 'none';
-        } else {
-            groupOpenAI.style.display = 'none';
-            groupGemini.style.display = 'block';
-        }
-    }
 
     // Save Settings
     saveBtn.addEventListener('click', () => {
         chrome.storage.local.set({
-            provider: providerSelect.value,
-            openaiApiKey: apiKeyOpenAI.value.trim(),
-            geminiApiKey: apiKeyGemini.value.trim()
+            textSize: textSizeSelect.value,
+            showGerman: showGermanCheckbox.checked
         }, () => {
             showStatus('Settings saved!', 'success');
         });
-    });
-
-    // Toggle Extension
-    toggleSwitch.addEventListener('change', () => {
-        const isEnabled = toggleSwitch.checked;
-        chrome.storage.local.set({ extensionEnabled: isEnabled });
     });
 
     function showStatus(msg, type) {

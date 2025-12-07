@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediathek Translator - Master German with TV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts (Kept from original) -->
+    <link id="all-fonts-link-font-geist" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+</head>
+
+<body class="antialiased selection:bg-[#F97316] selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav
+        class="fixed w-full top-0 z-50 bg-[#FFFBF2]/80 backdrop-blur-md border-b border-[#123F3E]/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-12">
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 bg-[#123F3E] rounded-lg flex items-center justify-center text-white">
+                        <i data-lucide="subtitles" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-lg font-semibold tracking-tight text-[#123F3E]">Mediathek</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-[#123F3E]/70">
+                    <a href="#how-it-works" class="hover:text-[#123F3E] transition-colors">How it Works</a>
+                    <a href="#features" class="hover:text-[#123F3E] transition-colors">Features</a>
+                    <a href="#shows" class="hover:text-[#123F3E] transition-colors">Which Shows</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button
+                    class="bg-[#123F3E] text-white px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-[#123F3E]/90 hover:shadow-lg hover:shadow-[#123F3E]/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="chrome" class="w-4 h-4"></i>
+                    Add to Chrome
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="lg:pt-40 lg:pb-32 overflow-hidden pt-32 pr-6 pb-20 pl-6 relative">
+        <!-- Ambient Background -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            <div
+                class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-[#F97316]/10 to-transparent blur-3xl opacity-50">
+            </div>
+            <div class="absolute left-10 top-40 w-64 h-64 bg-[#123F3E]/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <!-- Left Content -->
+            <div class="space-y-8 reveal active max-w-2xl">
+                <div
+                    class="inline-flex gap-2 uppercase text-xs font-medium text-[#123F3E] tracking-wide bg-[#123F3E]/5 border-[#123F3E]/10 border rounded-full pt-1 pr-3 pb-1 pl-3 gap-x-2 gap-y-2 items-center">
+                    Available for GOOGLE CHROME</div>
+
+                <h1 class="lg:text-7xl leading-[1.1] text-5xl font-semibold text-[#123F3E] tracking-tight">
+                    Learn German while watching <span class="text-[#F97316]">ICONIC shows.</span>
+                </h1>
+
+                <p class="text-xl text-[#123F3E]/70 max-w-lg leading-relaxed font-normal">
+                    Instant dual-language subtitles for ARD and ZDF. Bridge the gap between entertainment and fluency
+                    with context-aware translations.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <button
+                        class="bg-[#123F3E] text-white px-8 py-3.5 rounded-lg font-medium text-base hover:bg-[#0F2829] hover:shadow-xl hover:shadow-[#123F3E]/20 transition-all duration-300 flex items-center justify-center gap-2">
+                        Download now
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Illustration: The Video Player Interface -->
+            <div
+                class="relative h-[500px] w-full flex items-center justify-center reveal delay-200 perspective-[1000px]">
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-[#F97316]/10 rounded-full blur-xl animate-float">
+                </div>
+                <div
+                    class="absolute bottom-10 -left-10 w-32 h-32 bg-[#123F3E]/10 rounded-full blur-xl animate-float-delayed">
+                </div>
+
+                <div
+                    class="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#123F3E]/10 overflow-hidden transform rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out">
+                    <!-- Browser Header -->
+                    <div class="h-10 bg-[#FAFAFA] border-b border-[#E5E5E5] flex items-center px-4 gap-2">
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-[#FF5F57]"></div>
+                            <div class="w-3 h-3 rounded-full bg-[#FEBC2E]"></div>
+                            <div class="w-3 h-3 rounded-full bg-[#28C840]"></div>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <div
+                                class="bg-[#EAEAEA] text-[#123F3E]/50 text-xs rounded px-2 py-0.5 inline-block w-48 text-left truncate">
+                                mediathekviewweb.de/video/...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Area -->
+                    <div class="aspect-video bg-[#0F2829] relative overflow-hidden group">
+                        <div class="absolute inset-0 opacity-40">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg"
+                                alt="German Cinema" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                        </div>
+
+                        <!-- Subtitles Area -->
+                        <div
+                            class="flex flex-col gap-3 w-full pr-8 pl-8 absolute bottom-16 left-0 gap-x-3 gap-y-3 items-center">
+                            <div
+                                class="bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-lg font-medium tracking-tight animate-fade-up">
+                                "Das Leben ist kein Ponyhof."
+                            </div>
+                            <div
+                                class="bg-[#F97316] text-white px-4 py-2 rounded-lg text-base font-medium tracking-tight shadow-lg shadow-[#F97316]/30 flex items-center gap-2 transform translate-y-1">
+                                <i data-lucide="languages" class="w-4 h-4 text-white/90"></i>
+                                "Life isn't a bed of roses."
+                            </div>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-12 flex items-center px-4 gap-4 text-white/80 border-t border-white/10 bg-black/40 backdrop-blur-md">
+                            <i data-lucide="pause" class="w-5 h-5 fill-current"></i>
+                            <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden">
+                                <div class="w-1/3 h-full bg-[#F97316]"></div>
+                            </div>
+                            <span class="text-xs font-mono">14:20 / 45:00</span>
+                            <i data-lucide="maximize" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Cloud (Kept) -->
+    <section class="py-10 border-y border-[#123F3E]/5 bg-white/50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-sm font-medium text-[#123F3E]/40 uppercase tracking-widest mb-8">Works seamlessly with</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 lg:gap-24 transition-all duration-500">
+                <img src="assets/ARD_logo.svg" alt="ARD Mediathek"
+                    class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <img src="assets/ZDF_logo.svg" alt="ZDF Mediathek"
+                    class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+            </div>
+        </div>
+    </section>
+
+    <!-- Show Explorer Filter Section -->
+    <section id="shows" class="py-24 px-6 bg-[#FFFBF2]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col gap-8 mb-12">
+                <div>
+                    <h2 class="text-4xl font-semibold text-[#123F3E] mb-4">Find your next favorite show</h2>
+                    <p class="text-[#123F3E]/60 max-w-xl">Filter by genre and your current language level to find the
+                        perfect content.</p>
+                </div>
+
+                <!-- Filters Container -->
+                <div class="space-y-6">
+                    <!-- Genre Filters (Horizontal Scroll) -->
+                    <div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar w-full" id="genre-filters">
+                        <button class="filter-pill active" data-type="genre" data-value="all">All Genres</button>
+                        <button class="filter-pill" data-type="genre" data-value="crime">Krimi / Crime</button>
+                        <button class="filter-pill" data-type="genre" data-value="history">Historical Drama</button>
+                        <button class="filter-pill" data-type="genre" data-value="comedy">Comedy & Satire</button>
+                        <button class="filter-pill" data-type="genre" data-value="news">News</button>
+                        <button class="filter-pill" data-type="genre" data-value="docu">Documentary</button>
+                        <button class="filter-pill" data-type="genre" data-value="kids">Kids</button>
+                        <button class="filter-pill" data-type="genre" data-value="soap">Telenovela</button>
+                    </div>
+
+                    <!-- Level Filters (Horizontal Scroll) -->
+                    <div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar w-full" id="level-filters">
+                        <button class="filter-pill filter-pill-green active" data-type="level" data-value="all">All
+                            Levels</button>
+                        <button class="filter-pill filter-pill-green" data-type="level" data-value="a1">A1</button>
+                        <button class="filter-pill filter-pill-green" data-type="level" data-value="a2">A2</button>
+                        <button class="filter-pill filter-pill-green" data-type="level" data-value="b1">B1</button>
+                        <button class="filter-pill filter-pill-green" data-type="level" data-value="b2">B2</button>
+                        <button class="filter-pill filter-pill-green" data-type="level" data-value="c1">C1</button>
+                        <button class="filter-pill filter-pill-green" data-type="level" data-value="c2">C2</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Grid (Full Width) -->
+            <div>
+                <div id="shows-grid" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar">
+                    <!-- Cards will be injected here by JS -->
+                </div>
+                <!-- Empty State -->
+                <div id="no-results" class="hidden text-center py-20">
+                    <div class="inline-flex justify-center items-center w-16 h-16 bg-[#123F3E]/5 rounded-full mb-4">
+                        <i data-lucide="search-x" class="w-8 h-8 text-[#123F3E]/40"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-[#123F3E]">No shows found</h3>
+                    <p class="text-[#123F3E]/60">Try adjusting your filters to find more content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: How It Works -->
+    <section id="how-it-works" class="py-24 px-6 bg-white relative">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-semibold text-[#123F3E] mb-16">How Mediathek Translator works</h2>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Steps List -->
+                <div class="space-y-4">
+                    <!-- Step 1 -->
+                    <div class="step-item active" data-step="1">
+                        <h3 class="text-xl font-bold text-[#F97316] mb-1">1. Install Extension</h3>
+                        <p class="text-[#123F3E]/70">Add the Mediathek Translator extension to your Chrome browser from
+                            the web store.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-item" data-step="2">
+                        <h3 class="text-xl font-medium text-[#123F3E] mb-1">2. Pin to Toolbar</h3>
+                        <p class="text-[#123F3E]/70">Pin the extension icon for easy access to settings and controls.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-item" data-step="3">
+                        <h3 class="text-xl font-medium text-[#123F3E] mb-1">3. Open a Video</h3>
+                        <p class="text-[#123F3E]/70">Navigate to ARD or ZDF Mediathek and start playing any video.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-item" data-step="4">
+                        <h3 class="text-xl font-medium text-[#123F3E] mb-1">4. Enjoy Dual Subtitles</h3>
+                        <p class="text-[#123F3E]/70">Translations appear automatically. Hover words to learn more!</p>
+                    </div>
+                </div>
+
+                <!-- Right: Dynamic Visuals -->
+                <div
+                    class="bg-[#FFFBF2] rounded-2xl h-[400px] w-full flex items-center justify-center p-8 border border-[#123F3E]/5 relative overflow-hidden shadow-inner">
+                    <!-- Image 1 -->
+                    <img src="assets/how_it_works_chrome_store_1765031803230.png"
+                        class="step-content active object-contain w-full h-full" alt="Chrome Web Store">
+
+                    <!-- Image 2 -->
+                    <img src="assets/how_it_works_pin_extension_1765031817411.png"
+                        class="step-content object-contain w-full h-full" alt="Pin Extension">
+
+                    <!-- Image 3 -->
+                    <img src="assets/how_it_works_open_video_1765031832661.png"
+                        class="step-content object-contain w-full h-full" alt="Open Video">
+
+                    <!-- Image 4 (Placeholder) -->
+                    <div
+                        class="step-content text-center p-8 bg-white/50 rounded-xl border border-dashed border-[#F97316]">
+                        <i data-lucide="languages" class="w-16 h-16 text-[#F97316] mx-auto mb-4"></i>
+                        <p class="text-lg font-medium text-[#123F3E]">Dual Subtitles Active</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-6 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-20 reveal">
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-[#123F3E] mb-4">Unlock understanding,
+                    not just words</h2>
+                <p class="text-lg text-[#123F3E]/60">
+                    Traditional translation disrupts flow. We seamlessly integrate into your viewing experience so you
+                    learn while you watch.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div
+                    class="group p-8 rounded-3xl bg-white border border-[#123F3E]/5 hover:border-[#F97316]/30 shadow-sm hover:shadow-xl hover:shadow-[#F97316]/5 transition-all duration-300 reveal">
+                    <div
+                        class="w-12 h-12 bg-[#FFFBF2] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="layers" class="w-6 h-6 text-[#F97316]"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-[#123F3E] mb-3">Dual Subtitles</h3>
+                    <p class="text-[#123F3E]/60 leading-relaxed">
+                        See German and English subtitles simultaneously. Understand the sentence structure without
+                        pausing to look up every word.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="group p-8 rounded-3xl bg-white border border-[#123F3E]/5 hover:border-[#F97316]/30 shadow-sm hover:shadow-xl hover:shadow-[#F97316]/5 transition-all duration-300 reveal delay-100">
+                    <div
+                        class="w-12 h-12 bg-[#FFFBF2] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="mouse-pointer-click" class="w-6 h-6 text-[#123F3E]"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-[#123F3E] mb-3">Click-to-Translate</h3>
+                    <p class="text-[#123F3E]/60 leading-relaxed">
+                        Hover over any difficult German word to see its definition, gender (der/die/das), and contextual
+                        usage instantly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 px-6 bg-white border-t border-[#123F3E]/5">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-semibold tracking-tight text-center text-[#123F3E] mb-12 reveal">Frequently asked
+                questions</h2>
+
+            <div class="space-y-2 reveal delay-100">
+                <div class="group border border-[#123F3E]/10 rounded-xl bg-[#FFFBF2]/30 overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="text-base font-medium text-[#123F3E]">Is it free to use?</span>
+                        <i data-lucide="chevron-down"
+                            class="w-5 h-5 text-[#123F3E]/40 transition-transform duration-300 group-hover:text-[#F97316]"></i>
+                    </button>
+                    <div class="h-0 transition-all duration-300 ease-in-out opacity-0">
+                        <div class="px-6 pb-6 text-[#123F3E]/70">
+                            Yes! The core features including dual subtitles and instant translation are free forever. We
+                            offer a premium tier for unlimited vocabulary saving.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group border border-[#123F3E]/10 rounded-xl bg-[#FFFBF2]/30 overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="text-base font-medium text-[#123F3E]">Does it work on Netflix or Amazon
+                            Prime?</span>
+                        <i data-lucide="chevron-down"
+                            class="w-5 h-5 text-[#123F3E]/40 transition-transform duration-300 group-hover:text-[#F97316]"></i>
+                    </button>
+                    <div class="h-0 transition-all duration-300 ease-in-out opacity-0">
+                        <div class="px-6 pb-6 text-[#123F3E]/70">
+                            Currently, we are optimized for German public broadcasters (ARD, ZDF, Arte, 3sat) to ensure
+                            the highest quality of learning from authentic German culture.
+                            Look at LangaugeReactor for Netlfix and Prime support for Lanuage learning.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group border border-[#123F3E]/10 rounded-xl bg-[#FFFBF2]/30 overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                        onclick="toggleFaq(this)">
+                        <span class="text-base font-medium text-[#123F3E]">I do not see any translations? </span>
+                        <i data-lucide="chevron-down"
+                            class="w-5 h-5 text-[#123F3E]/40 transition-transform duration-300 group-hover:text-[#F97316]"></i>
+                    </button>
+                    <div class="h-0 transition-all duration-300 ease-in-out opacity-0">
+                        <div class="px-6 pb-6 text-[#123F3E]/70">
+                            Check if the video has German Subtitles. If not sadly at the current stage we also can not
+                            translate.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#FFFBF2] text-[#123F3E] pt-24 pb-12 px-6 border-t border-[#123F3E]/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
+                <!-- Logo and Description -->
+                <div class="max-w-sm">
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 bg-[#123F3E] rounded-lg flex items-center justify-center text-white">
+                            <i data-lucide="subtitles" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-lg font-semibold tracking-tight">Mediathek</span>
+                    </a>
+                    <p class="text-[#123F3E]/60">
+                        Turning entertainment into education. We believe the best way to learn a language is to live it.
+                    </p>
+                </div>
+
+                <!-- Links (Right Aligned) -->
+                <div class="flex flex-wrap gap-6 text-xs text-[#123F3E]/40 pb-1">
+                    <a href="imprint-en.html" class="hover:text-[#123F3E] transition-colors">Legal Notice</a>
+                    <a href="privacy-en.html" class="hover:text-[#123F3E] transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#123F3E] transition-colors">Report a bug</a>
+                </div>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

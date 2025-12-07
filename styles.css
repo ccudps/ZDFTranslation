@@ -17,8 +17,8 @@
 
   /* Overlay specific colors */
   --zl-color-overlay-bg: #333333;
-  --zl-color-text-german: #D9D0BB;
-  --zl-color-text-english: #F5F5F5;
+  --zl-color-text-german: #FFFF00;
+  --zl-color-text-english: #ffffff;
 
   /* Spacing & Layout */
   --zl-spacing-xs: 5px;
@@ -32,7 +32,8 @@
   /* Typography */
   --zl-font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --zl-font-size-base: 16px;
-  --zl-font-size-lg: 32px;
+  /* Responsive font size: minimum 24px, preferred 4.5% of viewport min dimension (scales with video), max 60px */
+  --zl-font-size-lg: clamp(24px, 4.5vmin, 60px);
   --zl-font-weight-bold: 600;
 
   /* Transitions */
@@ -42,6 +43,17 @@
   /* Utils */
   --zl-z-max: 2147483647;
   --zl-color-warning: #ff4444;
+}
+
+/* Specific override when in fullscreen to ensure visibility */
+:fullscreen .zdf-lingua-german,
+:fullscreen .zdf-lingua-english,
+:-webkit-full-screen .zdf-lingua-german,
+:-webkit-full-screen .zdf-lingua-english {
+  /* Enforce size to prevent parent CSS from overriding when we append to player */
+  /* Much larger size: min 48px, 8% of viewport min, max 120px */
+  font-size: clamp(38px, 6vmin, 60px) !important;
+  line-height: 1.4 !important;
 }
 
 /* =========================================
@@ -116,6 +128,48 @@ body.popup-body {
 }
 
 /* Primary Button */
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+}
+
+.checkbox-group input {
+  width: auto;
+}
+
+button.save-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #fa7d09;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.save-btn:hover {
+  background-color: #ff912b;
+}
+
+/* Text Sizes for Overlay (handled in content.js mostly, but generic classes here if needed) */
 .save-btn {
   width: 100%;
   padding: var(--zl-spacing-md);
@@ -202,6 +256,21 @@ input:checked+.slider:before {
 input:focus-visible+.slider {
   box-shadow: 0 0 1px var(--zl-color-primary);
 }
+
+/* Disabled State */
+input:disabled+.slider {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+input:disabled,
+select:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #ddd;
+}
+
 
 /* =========================================
    OVERLAY STYLES (Content Script)

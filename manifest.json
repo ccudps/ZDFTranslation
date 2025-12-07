@@ -8,6 +8,7 @@
     ],
     "host_permissions": [
         "https://*.zdf.de/*",
+        "https://*.ardmediathek.de/*",
         "https://api.openai.com/*",
         "https://generativelanguage.googleapis.com/*"
     ],
@@ -25,7 +26,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://*.zdf.de/*"
+                "https://*.zdf.de/*",
+                "https://*.ardmediathek.de/*"
             ],
             "js": [
                 "content.js"
@@ -46,7 +48,8 @@
                 "injected.js"
             ],
             "matches": [
-                "https://*.zdf.de/*"
+                "https://*.zdf.de/*",
+                "https://*.ardmediathek.de/*"
             ]
         }
     ]

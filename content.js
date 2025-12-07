@@ -16,14 +16,24 @@ let isUsingInterceptor = false;
 let currentSubtitleIndex = -1;
 let sessionTokenUsage = 0;
 
+// Settings
+let textSize = 'medium';
+let showGerman = true;
+
 // Initialize
 function init() {
     createOverlay();
 
     // Check functionality
-    chrome.storage.local.get(['extensionEnabled'], (result) => {
+    chrome.storage.local.get(['extensionEnabled', 'textSize', 'showGerman'], (result) => {
         isEnabled = result.extensionEnabled !== false;
+
+        if (result.textSize) textSize = result.textSize;
+        showGerman = result.showGerman !== false; // Default true
+
         updateOverlayVisibility();
+        applySettings(); // Apply initial settings
+
         if (isEnabled) {
             startObserving();
         }
@@ -49,6 +59,16 @@ function init() {
             } else {
                 stopObserving();
             }
+        }
+
+        if (changes.textSize) {
+            textSize = changes.textSize.newValue;
+            applySettings();
+        }
+
+        if (changes.showGerman) {
+            showGerman = changes.showGerman.newValue;
+            applySettings();
         }
     });
 
@@ -102,7 +122,13 @@ function handleInterceptedSubtitle(data) {
 function parseTTML(xmlText) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-    const paragraphs = xmlDoc.getElementsByTagName("tt:p"); // Handle namespace
+
+    // Robust tag name search (handles namespaced vs non-namespaced)
+    let paragraphs = xmlDoc.getElementsByTagName("tt:p");
+    if (paragraphs.length === 0) {
+        paragraphs = xmlDoc.getElementsByTagName("p");
+    }
+
     const track = [];
 
     // Helper to parse time HH:MM:SS.mmm to seconds
@@ -123,8 +149,12 @@ function parseTTML(xmlText) {
 
         // Extract text content, handling <br/> or spans
         let text = "";
-        // If it has spans, join them
-        const spans = p.getElementsByTagName("tt:span");
+
+        let spans = p.getElementsByTagName("tt:span");
+        if (spans.length === 0) {
+            spans = p.getElementsByTagName("span");
+        }
+
         if (spans.length > 0) {
             for (let j = 0; j < spans.length; j++) {
                 text += spans[j].textContent + " ";
@@ -197,8 +227,16 @@ function handleTimeUpdate(event) {
         activeSub = subtitleTrack.find(sub => time >= sub.start && time <= sub.end);
     }
 
+    // DEBUG: Trace active subtitle detection
+    /* 
+    if (Math.floor(time) % 2 === 0 && Math.random() < 0.05) {
+        console.log(`ZDF Lingua: Time ${time.toFixed(2)}, ActiveSub Index: ${activeSub ? activeSub.index : 'None'}`);
+    } 
+    */
+
     if (activeSub) {
         if (currentSubtitleIndex !== activeSub.index) {
+            console.log(`ZDF Lingua: Displaying subtitle #${activeSub.index}: "${activeSub.text}"`);
             currentSubtitleIndex = activeSub.index;
             updateDisplay(activeSub);
         }
@@ -209,6 +247,7 @@ function handleTimeUpdate(event) {
             // Only clear if we really left the window
             const lastSub = subtitleTrack[currentSubtitleIndex];
             if (lastSub && (time < lastSub.start || time > lastSub.end)) {
+                // console.log(`ZDF Lingua: Clearing display. Time ${time.toFixed(2)} outside [${lastSub.start}, ${lastSub.end}]`);
                 clearDisplay();
                 // Don't reset index to -1 if we just are in a gap; keep it as reference for "next"
                 // But wait, if we seeked far away, reference is useless.
@@ -266,6 +305,9 @@ function updateDisplay(subtitle) {
         if (!subtitle.isTranslating) triggerTranslation(subtitle);
     }
 
+    // Apply visibility setting for German immediately (redundant but safe)
+    germanDiv.style.display = showGerman ? 'block' : 'none';
+
     if (overlay) overlay.style.display = 'block';
 }
 
@@ -283,7 +325,10 @@ function clearDisplay() {
 }
 
 function triggerTranslation(subtitle) {
+    if (subtitle.isTranslating) return; // Prevent double trigger
     subtitle.isTranslating = true;
+
+    // console.log(`ZDF Lingua: Triggering translation for #${subtitle.index}`);
 
     try {
         chrome.runtime.sendMessage({
@@ -301,7 +346,7 @@ function triggerTranslation(subtitle) {
                 // Track Token Usage
                 if (response.tokenUsage) {
                     sessionTokenUsage += response.tokenUsage;
-                    console.log(`ZDF Lingua: Translation complete. Tokens: ${response.tokenUsage}. Session Total: ${sessionTokenUsage}`);
+                    console.log(`ZDF Lingua: Translation complete for #${subtitle.index}. Tokens: ${response.tokenUsage}.`);
                 }
 
                 // If this is currently displayed, update it immediately!
@@ -355,6 +400,44 @@ function createOverlay() {
     overlay.appendChild(englishDiv);
 
     document.body.appendChild(overlay);
+
+    // Apply Settings on creation
+    applySettings();
+}
+
+function applySettings() {
+    if (!overlay) return;
+
+    // Text Size
+    overlay.classList.remove('text-small', 'text-medium', 'text-large');
+    overlay.classList.add(`text-${textSize}`);
+
+    // Update style directly if classes aren't enough (dynamic scaling)
+    let scale = 1.0;
+    if (textSize === 'small') scale = 0.8;
+    if (textSize === 'large') scale = 1.3;
+
+    // We can use CSS variables or inline styles. Inline is easiest for immediate effect.
+    // NOTE: CSS styles were not fully implemented, so let's set font-size explicitly here.
+    // Or we rely on the CSS classes I mentioned in implementation plan.
+    // Let's set inline style for reliability.
+
+    if (textSize === 'small') {
+        germanDiv.style.fontSize = '18px';
+        englishDiv.style.fontSize = '18px';
+    } else if (textSize === 'medium') {
+        germanDiv.style.fontSize = '24px';
+        englishDiv.style.fontSize = '24px';
+    } else if (textSize === 'large') {
+        germanDiv.style.fontSize = '32px';
+        englishDiv.style.fontSize = '32px';
+    }
+
+    // German Visibility
+    if (germanDiv) {
+        germanDiv.style.display = showGerman ? 'block' : 'none';
+        // If hidden, we might want to adjust overlay height or padding, but auto-flow should handle it.
+    }
 }
 
 function updateOverlayVisibility() {
@@ -484,6 +567,9 @@ function handleNewText(text) {
     germanDiv.textContent = text;
     englishDiv.textContent = ""; // Silent loading
 
+    // Apply visibility setting
+    germanDiv.style.display = showGerman ? 'block' : 'none';
+
     // Guard against missing runtime (e.g. invalid context)
     if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.sendMessage) {
         console.error('ZDF Lingua: Context invalid (runtime missing)');
@@ -560,7 +646,16 @@ function handleVideoPlay(event) {
         console.log('ZDF Lingua: New video source detected:', video.currentSrc);
         lastVideoSrc = video.currentSrc;
         hasBufferedFirstSubtitle = false;
-        // No blackout, no buffering. Rely on interceptor.
+
+        // Re-attach sync engine if we already have subtitles
+        if (isUsingInterceptor && subtitleTrack.length > 0) {
+            console.log('ZDF Lingua: Re-attaching sync engine to new source.');
+            startSyncEngine(video);
+        }
+    } else if (isUsingInterceptor && subtitleTrack.length > 0) {
+        // Also ensure it's attached even if source didn't change (e.g. paused/played same vide)
+        // Check if listener is attached? hard to check directly, but startSyncEngine removes duplicates safely.
+        startSyncEngine(video);
     }
 }
 

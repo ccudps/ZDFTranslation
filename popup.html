@@ -10,28 +10,20 @@
 <body class="popup-body">
   <div class="header">
     <div class="logo">ZDF Lingua</div>
-    <label class="switch">
-      <input type="checkbox" id="toggle-extension">
-      <span class="slider"></span>
-    </label>
   </div>
 
   <div class="control-group">
-    <label for="provider-select">Translation Provider</label>
-    <select id="provider-select">
-      <option value="openai">OpenAI (GPT-4o-mini)</option>
-      <option value="gemini">Google Gemini (Flash)</option>
+    <label for="text-size">Text Size</label>
+    <select id="text-size">
+      <option value="small">Small</option>
+      <option value="medium" selected>Medium</option>
+      <option value="large">Large</option>
     </select>
   </div>
 
-  <div class="control-group" id="group-openai">
-    <label for="api-key-openai">OpenAI API Key</label>
-    <input type="password" id="api-key-openai" placeholder="sk-...">
-  </div>
-
-  <div class="control-group" id="group-gemini" style="display:none;">
-    <label for="api-key-gemini">Gemini API Key</label>
-    <input type="password" id="api-key-gemini" placeholder="AIza...">
+  <div class="control-group checkbox-group">
+    <label for="show-german">Show German Subtitles</label>
+    <input type="checkbox" id="show-german" checked>
   </div>
 
   <button class="save-btn" id="save-btn">Save Settings</button>
